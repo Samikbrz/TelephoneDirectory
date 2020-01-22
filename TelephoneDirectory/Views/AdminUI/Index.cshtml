@@ -1,0 +1,54 @@
+﻿@using TelephoneDirectory.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Working>
+@{
+    ViewBag.Title = "Index";
+}
+@if (Session["UserName"] != null)
+{
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Kullanıcı Bilgileri</a>
+            </div>
+        </div>
+    </nav>
+    <table class="table table-bordered">
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Telefon Numarası</th>
+            <th>Departman</th>
+            <th>Yönetici Bilgisi</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>        
+        <tbody>
+            @foreach (var information in Model)
+            {
+                <tr>
+                    <td>@information.Name</td>
+                    <td>@information.Surname</td>
+                    <td>@information.TelephoneNumber</td>
+                    <td>@information.Department1.DepartmentName</td>
+                    <td>@information.Administrator1.AdministratorName</td>
+                    <td><a class="btn btn-danger" href="/AdminUI/Delete/@information.WorkingId">Sil</a></td>
+                    <td><a class="btn btn-success" href="/AdminUI/Update/@information.WorkingId">Güncelle</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+    <a class="btn btn-primary" href="/AdminUI/AdminOperation">Admin İşlemleri</a>
+    <a class="btn btn-primary" href="/AdminUI/AdministratorOperation">Yönetici İşlemleri</a>
+    <a class="btn btn-primary" href="/AdminUI/AddNewWorking">Yeni Çalışan Ekle</a>
+    <a class="btn btn-primary" href="/AdminUI/DepartmentInformation">Departman Bilgileri</a>
+    <a class="btn btn-primary" href="/AdminUI/LogOut">Çıkış Yap</a>
+}
+else
+{
+    <a class="btn btn-success" href="/AdminUI/Login">Lütfen Giriş Yapınız</a>
+}
+
+

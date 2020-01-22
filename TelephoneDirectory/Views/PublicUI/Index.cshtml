@@ -1,0 +1,76 @@
+﻿@using TelephoneDirectory.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+@model PagedList.IPagedList<Working>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <table class="table table-bordered">
+        <tr>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Telefon Numarası</th>
+            <th>Detay</th>
+        </tr>
+        <tbody>
+            @foreach (var information in Model)
+            {
+                <tr>
+                    <td>@information.Name</td>
+                    <td>@information.Surname</td>
+                    <td>@information.TelephoneNumber</td>
+                    <td>
+                        <a data-toggle="modal" data-target="#@information.WorkingId" class="btn btn-primary">Detay</a>
+                    </td>
+                </tr>
+                <div class="modal" id="@information.WorkingId">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class=" modal-header">
+                                <h3 class="modal-title">Detaylar</h3>
+                            </div>
+                            <form>
+                                <div class="modal-body">
+                                    <label class="form-control">
+                                        Ad:@information.Name
+                                    </label>
+                                    <label class="form-control">
+                                        Soyad:@information.Surname
+                                    </label>
+                                    <label class="form-control">
+                                        Telefon Numarası:@information.TelephoneNumber
+                                    </label>
+                                    <label class="form-control">
+                                        Departman:@information.Department1.DepartmentName
+                                    </label>
+                                    <label class="form-control">
+                                        Yönetici Bilgisi:@information.Administrator1.AdministratorName
+                                    </label>
+                                </div>
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </tbody>
+    </table>
+</body>
+</html>
+@Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+
+
+
+
+
+
+

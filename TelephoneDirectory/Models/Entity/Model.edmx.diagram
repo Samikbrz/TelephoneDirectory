@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9255fc33e394459f924998948a3a1a92" Name="Diagram1">
+        <EntityTypeShape EntityType="InternShipProjectModel.Admin" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InternShipProjectModel.Administrator" Width="1.5" PointX="7.625" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InternShipProjectModel.Department" Width="1.5" PointX="4.125" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="InternShipProjectModel.Working" Width="1.5" PointX="4.125" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="InternShipProjectModel.FK_Working_Admin" ManuallyRouted="false" />
+        <AssociationConnector Association="InternShipProjectModel.FK_Working_Administrator" ManuallyRouted="false" />
+        <AssociationConnector Association="InternShipProjectModel.FK_Working_Department" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

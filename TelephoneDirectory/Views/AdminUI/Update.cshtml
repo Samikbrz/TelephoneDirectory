@@ -1,0 +1,45 @@
+﻿@model TelephoneDirectory.Models.Entity.Working
+@{
+    ViewBag.Title = "Update";
+}
+@if (Session["UserName"] != null)
+{
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Kullanıcı Bilgileri Güncelle</a>
+            </div>
+        </div>
+    </nav>
+    using (Html.BeginForm("UpdateData", "AdminUI", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.WorkingId)
+            @Html.TextBoxFor(m => m.WorkingId, new { @class = "form-control" })
+            <br />
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+            <br />
+            @Html.LabelFor(m => m.Surname)
+            @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+            <br />
+            @Html.LabelFor(m => m.TelephoneNumber)
+            @Html.TextBoxFor(m => m.TelephoneNumber, new { @class = "form-control" })
+            <br />
+            @Html.LabelFor(m => m.Department1.DepartmentName)
+            @Html.TextBoxFor(m => m.Department1.DepartmentName, new { @class = "form-control" })
+            <br />
+            @Html.LabelFor(m => m.Administrator)
+            @Html.TextBoxFor(m => m.Administrator1.AdministratorName, new { @class = "form-control" })
+            <br />
+        </div>
+        <div>
+            <button class="btn btn-info">Güncelle</button>
+        </div>
+    }
+}
+else
+{
+    <a class="btn btn-success" href="/AdminUI/Login">Lütfen Giriş Yapınız</a>
+}
+

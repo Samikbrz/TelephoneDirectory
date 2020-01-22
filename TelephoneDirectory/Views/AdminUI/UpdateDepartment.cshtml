@@ -1,0 +1,32 @@
+﻿@model TelephoneDirectory.Models.Entity.Department
+@{
+    ViewBag.Title = "UpdateDepartment";
+}
+@if (Session["UserName"] != null)
+{
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Departman Güncelle</a>
+            </div>
+        </div>
+    </nav>
+    using (Html.BeginForm("UpdateDataDepartment", "AdminUI", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.DepartmentId)
+            @Html.TextBoxFor(m => m.DepartmentId, new { @class = "form-control" })
+            <br />
+            @Html.LabelFor(m => m.DepartmentName)
+            @Html.TextBoxFor(m => m.DepartmentName, new { @class = "form-control" })
+            <br />
+        </div>
+        <div>
+            <button class="btn btn-info">Güncelle</button>
+        </div>
+    }
+}
+else
+{
+    <a class="btn btn-success" href="/AdminUI/Login">Lütfen Giriş Yapınız</a>
+}

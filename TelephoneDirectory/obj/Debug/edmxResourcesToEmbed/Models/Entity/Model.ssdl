@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InternShipProjectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="varchar" MaxLength="20" />
+    <Property Name="Password" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdministratorId" />
+    </Key>
+    <Property Name="AdministratorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AdministratorName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DepartmentName" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Working">
+    <Key>
+      <PropertyRef Name="WorkingId" />
+    </Key>
+    <Property Name="WorkingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="10" />
+    <Property Name="Surname" Type="varchar" MaxLength="10" />
+    <Property Name="TelephoneNumber" Type="varchar" MaxLength="11" />
+    <Property Name="Department" Type="int" />
+    <Property Name="Administrator" Type="int" />
+  </EntityType>
+  <Association Name="FK_Working_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Working" Type="Self.Working" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="Working">
+        <PropertyRef Name="Administrator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Working_Administrator">
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
+    <End Role="Working" Type="Self.Working" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdministratorId" />
+      </Principal>
+      <Dependent Role="Working">
+        <PropertyRef Name="Administrator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Working_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Working" Type="Self.Working" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Working">
+        <PropertyRef Name="Department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InternShipProjectModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Administrator" EntityType="Self.Administrator" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Working" EntityType="Self.Working" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Working_Admin" Association="Self.FK_Working_Admin">
+      <End Role="Admin" EntitySet="Admin" />
+      <End Role="Working" EntitySet="Working" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Working_Administrator" Association="Self.FK_Working_Administrator">
+      <End Role="Administrator" EntitySet="Administrator" />
+      <End Role="Working" EntitySet="Working" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Working_Department" Association="Self.FK_Working_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Working" EntitySet="Working" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

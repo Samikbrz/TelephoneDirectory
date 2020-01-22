@@ -1,0 +1,58 @@
+﻿@using TelephoneDirectory.Models.Entity
+@model List<Admin>
+@{
+    ViewBag.Title = "PasswordOperation";
+}
+@if (Session["UserName"] != null)
+{
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Admin İşlemleri</a>
+            </div>
+        </div>
+    </nav>
+    <table class="table table-bordered">
+        <tr>
+            <th>AdminId</th>
+            <th>Kullanıcı Adı</th>
+            <th>Şifre</th>
+            <th>Sil</th>
+            <th>Güncelle</th>
+        </tr>
+        <tbody>
+            @foreach (var information in Model)
+            {
+                <tr>
+                    <td>@information.AdminId</td>
+                    <td>@information.UserName</td>
+                    <td>@information.Password</td>
+                    <td><a class="btn btn-danger" href="/AdminUI/AdminDelete/@information.AdminId">Sil</a></td>
+                    <td><a class="btn btn-success" href="/AdminUI/AdminUpdate/@information.AdminId">Güncelle</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div>
+        <form method="post">
+            <div class="form-group">
+                <label>Kullanıcı Adı</label>
+                <input type="text" class="form-control" name="UserName" required />
+            </div>
+            <div class="form-group">
+                <label>Şifre</label>
+                <input type="text" class="form-control" name="Password" required />
+            </div>
+            <div style="margin-top:15px">
+                <button class="btn btn-info" href="/AdminUI/AdminOperation">Admin Ekle</button>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <a class="btn btn-success" href="/AdminUI/Login">Lütfen Giriş Yapınız</a>
+}
+
+
+

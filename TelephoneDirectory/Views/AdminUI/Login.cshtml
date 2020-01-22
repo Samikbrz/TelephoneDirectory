@@ -1,0 +1,53 @@
+﻿@model TelephoneDirectory.Models.Entity.Admin
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Yeni Kullanıcı Ekle</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    @using (Html.BeginForm("Login", "AdminUI", FormMethod.Post))
+    {
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Admin Login</a>
+                </div>
+            </div>
+        </nav>
+        <div>
+            <form>
+                <div class="form-group">
+                    <label>Kullanıcı Adı</label>
+                    <input type="text" class="form-control" name="UserName" required />
+                </div>
+                <div class="form-group">
+                    <label>Sifre</label>
+                    <input type="password" class="form-control" name="Password" required />
+                </div>
+                <div style="margin-top:15px">
+                    <button class="btn btn-info" href="/AdminUI/Index">Giriş</button>
+                </div>
+                @if (!string.IsNullOrEmpty(ViewBag.Message))
+                {
+                    <div style="color:red">
+                        @ViewBag.Message
+                    </div>
+                }
+
+            </form>
+        </div>
+
+
+    }
+    
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿@model TelephoneDirectory.Models.Entity.Admin
+@{
+    ViewBag.Title = "AdminUpdate";
+}
+@if (Session["UserName"] != null)
+{
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand">Admin Bilgileri Güncelle</a>
+            </div>
+        </div>
+    </nav>
+    using (Html.BeginForm("AdminDataUpdate", "AdminUI", FormMethod.Post))
+    {
+        <div class="form-group">
+            @Html.LabelFor(m => m.AdminId)
+            @Html.TextBoxFor(m => m.AdminId, new { @class = "form-control" })
+            <br />
+            @Html.LabelFor(m => m.UserName)
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+            <br />
+            @Html.LabelFor(m => m.Password)
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control" })
+            <br />
+        </div>
+        <div>
+            <button class="btn btn-info">Güncelle</button>
+        </div>
+    }
+}
+else
+{
+    <a class="btn btn-success" href="/AdminUI/Login">Lütfen Giriş Yapınız</a>
+}

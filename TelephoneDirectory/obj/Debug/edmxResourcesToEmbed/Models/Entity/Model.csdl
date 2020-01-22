@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="InternShipProjectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="AdminId" />
+    </Key>
+    <Property Name="AdminId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Working" Relationship="Self.FK_Working_Admin" FromRole="Admin" ToRole="Working" />
+  </EntityType>
+  <EntityType Name="Administrator">
+    <Key>
+      <PropertyRef Name="AdministratorId" />
+    </Key>
+    <Property Name="AdministratorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AdministratorName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Working" Relationship="Self.FK_Working_Administrator" FromRole="Administrator" ToRole="Working" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Working" Relationship="Self.FK_Working_Department" FromRole="Department" ToRole="Working" />
+  </EntityType>
+  <EntityType Name="Working">
+    <Key>
+      <PropertyRef Name="WorkingId" />
+    </Key>
+    <Property Name="WorkingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Surname" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="TelephoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Department" Type="Int32" />
+    <Property Name="Administrator" Type="Int32" />
+    <NavigationProperty Name="Admin" Relationship="Self.FK_Working_Admin" FromRole="Working" ToRole="Admin" />
+    <NavigationProperty Name="Administrator1" Relationship="Self.FK_Working_Administrator" FromRole="Working" ToRole="Administrator" />
+    <NavigationProperty Name="Department1" Relationship="Self.FK_Working_Department" FromRole="Working" ToRole="Department" />
+  </EntityType>
+  <Association Name="FK_Working_Admin">
+    <End Role="Admin" Type="Self.Admin" Multiplicity="0..1" />
+    <End Role="Working" Type="Self.Working" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Admin">
+        <PropertyRef Name="AdminId" />
+      </Principal>
+      <Dependent Role="Working">
+        <PropertyRef Name="Administrator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Working_Administrator">
+    <End Role="Administrator" Type="Self.Administrator" Multiplicity="0..1" />
+    <End Role="Working" Type="Self.Working" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Administrator">
+        <PropertyRef Name="AdministratorId" />
+      </Principal>
+      <Dependent Role="Working">
+        <PropertyRef Name="Administrator" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Working_Department">
+    <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+    <End Role="Working" Type="Self.Working" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="DepartmentId" />
+      </Principal>
+      <Dependent Role="Working">
+        <PropertyRef Name="Department" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="InternShipProjectEntitiesOne" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="Self.Admin" />
+    <EntitySet Name="Administrator" EntityType="Self.Administrator" />
+    <EntitySet Name="Department" EntityType="Self.Department" />
+    <EntitySet Name="Working" EntityType="Self.Working" />
+    <AssociationSet Name="FK_Working_Admin" Association="Self.FK_Working_Admin">
+      <End Role="Admin" EntitySet="Admin" />
+      <End Role="Working" EntitySet="Working" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Working_Administrator" Association="Self.FK_Working_Administrator">
+      <End Role="Administrator" EntitySet="Administrator" />
+      <End Role="Working" EntitySet="Working" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Working_Department" Association="Self.FK_Working_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Working" EntitySet="Working" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
